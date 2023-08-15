@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { filterGames, orderGames, setGenres } from "../../redux/actions"
-
+//Cards
 const Cards = (props)=> {
 
     const dispatch = useDispatch();

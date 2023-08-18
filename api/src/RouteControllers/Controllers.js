@@ -36,20 +36,6 @@ const {Op} = require("sequelize");
          }
          ))
 
-        
-        //       .map(game => {
-        //       return {
-        //           id: game.id,
-        //           name: game.name,
-        //           released: game.released,
-        //           image: game.image,
-        //           rating: game.rating,
-        // // //         platforms: game.platforms.map(el => el.platform.name),
-        //           genres: game.genres.map(el => { return { id: el.id, name: el.name } }),
-        //       };
-        //   })
-        
-
 
          return res.status(200).json(videogames);
      } catch (error) {
@@ -156,7 +142,7 @@ const getVideogameById = async (req, res) => {
 const createVideogameEntry = async (req, res) => {
     try {
         const {name, description, platforms, image, released, rating, genre} = req.body;
-        //faltan validaciones
+        
         const videogame = await Videogame.create({name,description,platforms,image,released,rating})
         videogame.setGenres(genre);
         return res.status(200).json({videogame, genre})

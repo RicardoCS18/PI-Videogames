@@ -26,17 +26,11 @@
 }
 
 .error {
-  color: red;
-  font-size: small;
+  color: rgb(255, 1, 1);
+  font-size: 15px;
+
 }
-.errorPlaceholder{
-    position: relative;
-    top: 0;
-    right: 0;
-    color: transparent; /* Make the placeholder text transparent */
-    font-size: small;
-    transform: translateY(-100%);
-}
+
 .inputContainer{
     display: flex;
   flex-direction: column;

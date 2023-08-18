@@ -4,7 +4,7 @@ const Enter = ()=> {
     return(
         <div className={style.container}>
         
-        <button className={style.button} ><NavLink to="/home" className={style.button}><h2>Enter</h2></NavLink></button>
+        <button className={style.button} ><NavLink to="/home" className={style.buttonNav}><h2>Enter</h2></NavLink></button>
         </div>
     )
 }

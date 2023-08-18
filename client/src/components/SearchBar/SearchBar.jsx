@@ -15,7 +15,7 @@ const SearchBar = ({handleSubmit}) => {
     
     return(
         <div className={style.container}>
-        <input className={style.input} type="search" onChange={handleChange} value={name} placeholder="Busca un vídeojuego"/>
+        <input className={style.input} type="search" onChange={handleChange} value={name} placeholder="Search a videogame"/>
         <button className={style.search} onClick={handleSearch} id={name} >Buscar</button>
         </div>
     )

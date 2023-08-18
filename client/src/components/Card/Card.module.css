@@ -14,16 +14,24 @@
     opacity: 0.8;
 }
   
-.genre{
-    border: 1px solid #c4beb7;
-    border-radius: 3px;
-    font-size: small;
-    text-align: end;
-    margin: 3px;
-    padding: 5px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.genreContainer {
+  
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  margin-top: 10px;
 }
 
+.genre {
+
+  border: 1px solid #c4beb7;
+  border-radius: 3px;
+  font-size: small;
+  color: white;
+  padding: 5px 10px;
+  margin: 3px;
+  border-radius: 4px;
+}
 .nameLink{
     text-decoration: none;
     color: black;

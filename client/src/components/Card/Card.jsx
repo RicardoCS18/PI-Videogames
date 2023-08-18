@@ -10,21 +10,13 @@ const Card = ({id, name, image, genres})=> {
         <NavLink to={`/detail/${id}`} className={style.nameLink}>
         <div 
         className={style.cardContainer}
-        //className={style.cardContainer}
-    //     style={{
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center",
-    //     textAlign: "center",
-    //     width:"33%",
-    //     height:"400px"
-    //   }}
+
       >
          
         
         <img  src={image} className={style.image} width="100" height="100" alt="videogame" />
         <h2 className={style.name}>{name}</h2>
-        <h3 >{genres && genres.map((genre) =>(<span className={style.genre} key={genre.id}>{genre.name + " "}</span>))}</h3>
+        <div className={style.genreContainer}>{genres && genres.map((genre) =>(<span className={style.genre} key={genre.id}>{genre.name + " "}</span>))}</div>
         
         </div>
         </NavLink>

@@ -8,31 +8,33 @@ const {Op} = require("sequelize");
  const getAllVideogames = async (req, res) => {
      try {
         const videogames= [];
-        
-
-            let pages =[1,2,3,4,5,6,7,8,9,10]  // [1,2,3,4,5,6,7,8,9,10] [1,2,3,4,5]
-        
-         await Promise.all(pages.map(async (page)=>{ 
-            
-             const games = await axios.get(`${API_URL_GAMES}?key=${API_KEY}&page=${page}`)
-
-             videogames.push(...games.data.results.map(el=>{ return {
-                 id:el.id,
-                 name:el.name,
-                 released: el.released,
-                 image:el.background_image,
-                 rating: el.rating,
-                 platforms:el.platforms.map(el=> el.platform.name),
-                 genres: el.genres.map(el=>{return {id:el.id, name:el.name}}),
-         }}))
-         }
-         ))
 
         const gamesDB = await Videogame.findAll({
             include: [{ model: Genre, through: { attributes: [] } }]
         });
 
-        videogames.push(...gamesDB
+        videogames.push(...gamesDB);
+        
+
+        let pages =[1,2,3,4,5,6,7,8,9,10]  // [1,2,3,4,5,6,7,8,9,10] [1,2,3,4,5]
+        
+        await Promise.all(pages.map(async (page)=>{ 
+            
+            const games = await axios.get(`${API_URL_GAMES}?key=${API_KEY}&page=${page}`)
+
+            videogames.push(...games.data.results.map(el=>{ return {
+                id:el.id,
+                name:el.name,
+                released: el.released,
+                image:el.background_image,
+                rating: el.rating,
+                platforms:el.platforms.map(el=> el.platform.name),
+                genres: el.genres.map(el=>{return {id:el.id, name:el.name}}),
+         }}))
+         }
+         ))
+
+        
         //       .map(game => {
         //       return {
         //           id: game.id,
@@ -44,7 +46,7 @@ const {Op} = require("sequelize");
         //           genres: game.genres.map(el => { return { id: el.id, name: el.name } }),
         //       };
         //   })
-        );
+        
 
 
          return res.status(200).json(videogames);

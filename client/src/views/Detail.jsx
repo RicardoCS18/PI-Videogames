@@ -25,10 +25,10 @@ const Detail = () => {
       };
   }, [id]);
     return ( 
-    <div>
+    <div style={{ width: '1000px', height: '1000px', background:"lightgray", margin: 100 }}>
         <h2>{videogame.id}</h2>
         <h3>{videogame.name}</h3>
-        <img src={videogame.image} alt="videogame" />
+        <img src={videogame.image} width="500px"  alt="videogame" />
         <h3>{videogame.genres && videogame.genres.map((el)=>(<span key={el.id}>{el.name+ " "}</span>))}</h3>
         <div dangerouslySetInnerHTML={{
           __html: videogame.description

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { filterGames, orderGames, setGenres } from "../../redux/actions"
+import style from "./Cards.module.css"
 //Cards
 const Cards = (props)=> {
 
@@ -63,13 +64,14 @@ const Cards = (props)=> {
     }
 
     return(
-        <>
-        <button onClick={displaying} name="FilterByGenre">Filter by Genre</button> 
+        <div className={style.container}>
+        <button className={style.options} onClick={displaying} name="FilterByGenre">Filter by Genre</button> 
         {showOptions.FilterByGenre && 
-        <div>
+        <div className={style.checkContainer}>
         {genres.map((genre) => (
-                <label key={genre.id}>
+                <label key={genre.id} className={style.check}>
                 <input
+                
                     type="checkbox"
                     name="genre"
                     value={genre.name}
@@ -81,10 +83,10 @@ const Cards = (props)=> {
         }
         </div>
         }
-        <button onClick={displaying} name="FilterByOrigin">Filter by Origin</button> 
+        <button className={style.options} onClick={displaying} name="FilterByOrigin">Filter by Origin</button> 
         {showOptions.FilterByOrigin &&
-        <div>
-            <label>
+        <div className={style.checkContainer}>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="origin"
@@ -94,7 +96,7 @@ const Cards = (props)=> {
                 />
                 All
             </label>
-            <label>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="origin"
@@ -104,7 +106,7 @@ const Cards = (props)=> {
                 />
                 DB
             </label>
-            <label>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="origin"
@@ -116,10 +118,10 @@ const Cards = (props)=> {
             </label>
         </div>
         }
-        <button onClick={displaying} name="Order">Order</button>
+        <button className={style.options} onClick={displaying} name="Order">Order</button>
         {showOptions.Order && 
-        <div>
-            <label>
+        <div className={style.checkContainer}>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="order"
@@ -129,7 +131,7 @@ const Cards = (props)=> {
                 />
                 AscendingRating
             </label>
-            <label>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="order"
@@ -139,7 +141,7 @@ const Cards = (props)=> {
                 />
                 DescendingRating
             </label>
-            <label>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="order"
@@ -149,7 +151,7 @@ const Cards = (props)=> {
                 />
                 AscendingName
             </label>
-            <label>
+            <label className={style.check}>
                 <input
                     type="radio"
                     name="order"
@@ -182,6 +184,7 @@ const Cards = (props)=> {
         </div>
         <div>
         <button
+            className={style.nextPageButton}
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -190,6 +193,7 @@ const Cards = (props)=> {
         <>
         {pagesToRender.map(page=>(
         <button
+            className={style.pageButton}
             key={page}
             onClick={()=> setCurrentPage(page)}
             disabled={page === currentPage}
@@ -198,13 +202,14 @@ const Cards = (props)=> {
         </button>))}
         </>
         <button
+            className={style.nextPageButton}
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={lastItemIndex >= props.videogames.length}
         >
           Next Page
         </button>
       </div>
-        </>
+        </div>
     )
 }
 export default Cards 

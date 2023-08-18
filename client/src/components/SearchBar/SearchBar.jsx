@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import style from "./SearchBar.module.css"
 
 const SearchBar = ({handleSubmit}) => {
     let [name, setName] = useState("");
@@ -9,14 +10,14 @@ const SearchBar = ({handleSubmit}) => {
     }
     const handleSearch = () => {
         handleSubmit(name);
-    //    setName("");
         navigate("/home")
     }
+    
     return(
-        <>
-        <input type="search" onChange={handleChange} value={name} placeholder="Busca un vídeojuego"/>
-        <button onClick={handleSearch} id={name} >Buscar</button>
-        </>
+        <div className={style.container}>
+        <input className={style.input} type="search" onChange={handleChange} value={name} placeholder="Busca un vídeojuego"/>
+        <button className={style.search} onClick={handleSearch} id={name} >Buscar</button>
+        </div>
     )
 }
 

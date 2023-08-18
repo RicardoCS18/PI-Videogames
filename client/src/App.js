@@ -19,7 +19,8 @@ function App() {
     if(videogames.length === 0) {console.log("fetching videogames") 
     axios.get("http://localhost:3001/videogames").then(response => {
       dispatch(setGames(response.data))
-    })}
+    })
+  }
   }
   , [])
 
@@ -33,6 +34,7 @@ function App() {
         window.alert("An error occurred.");
     }})
   }
+
 return (
     <div className="App">
       {location.pathname!=="/" && <NavBar handleSubmit={handleSubmit}/>}

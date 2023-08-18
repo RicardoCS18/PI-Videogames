@@ -1,0 +1,36 @@
+
+.container{
+    display:flex;
+    background-color: rgb(196, 190, 183);
+    justify-content: space-between;
+    padding: 10px;  
+    
+}
+.home{
+    background-color: #494849;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    margin-left: 350px;
+}
+.create{
+    background-color: #494849;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 350px;
+}
+
+.home:hover {
+    
+    transform: scale(1.05);
+    opacity: 0.7;
+}
+.create:hover {
+    
+    transform: scale(1.05);
+    opacity: 0.7;
+       
+}

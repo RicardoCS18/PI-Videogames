@@ -6,7 +6,9 @@ const { Genre, Videogame } = require('../db')
 const {Op} = require("sequelize");
 
  const getAllVideogames = async (req, res) => {
+    
      try {
+
         const videogames= [];
 
         const gamesDB = await Videogame.findAll({

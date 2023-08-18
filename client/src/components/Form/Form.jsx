@@ -98,11 +98,11 @@ const Form = () => {
 
         if (Object.keys(validation).length === 0) {
             axios.post("http://localhost:3001/videogames", form)
-                .then(response => {
-                window.alert("Post successful", response.data);
-                })
                 .then(axios.get("http://localhost:3001/videogames").then(response => {
                     dispatch(setGames(response.data))}))
+                .then(response => {
+                window.alert("Game entry has been successfully posted!");
+                })
                 .catch(error => {
                 console.error("Error posting data", error);
                 });
@@ -175,7 +175,9 @@ const Form = () => {
             </div>
             {inputsToCheck.genre && error.genre && <span className={style.error}>{error.genre}</span>}
             <br />
-            <button type="submit" disabled={isDisabled} >Create</button>
+            <button 
+            className={`${isDisabled=== true? "" : style.createButton}`}
+            type="submit" disabled={isDisabled} >Create</button>
         </form>
         </div>
     )

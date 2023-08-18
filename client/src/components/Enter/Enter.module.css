@@ -1,0 +1,25 @@
+.button {
+    position: relative;
+    border-radius: 10px;
+    background: #575757;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.button:hover{
+    opacity: 0.5;
+    transform: scale(1.1);
+}
+.container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(196,190,183,1) 25%, rgba(54,44,44,1) 100%);
+}
+  

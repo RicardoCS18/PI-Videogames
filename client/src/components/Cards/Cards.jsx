@@ -2,35 +2,45 @@ import Card from "../Card/Card"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-import { filterGames, orderGames, setGenres } from "../../redux/actions"
+import { filterGames, orderGames, setGenres, setGames } from "../../redux/actions"
+import loaderGif from '../../assets/squareLoader.gif';
 import style from "./Cards.module.css"
+
+
 //Cards
-const Cards = (props)=> {
+const Cards = ()=> {
 
     const dispatch = useDispatch();
     const genres = useSelector(state => state.allGenres)
+    const videogames = useSelector(state => state.modifiedVideogames)
 
     const [showOptions, setShowOptions] = useState({FilterByGenre: false,FilterByOrigin:false, Order:false})
     const [filters, setFilters] = useState({genre:[], origin:["All"]})
     const [order, setOrder] = useState("")    
     const [currentPage, setCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+    
 
     const videogamesPerPage = 15;
     const lastItemIndex = currentPage * videogamesPerPage;
     const firstItemIndex = lastItemIndex - videogamesPerPage;
-    const currentVideogames = props.videogames.slice(firstItemIndex, lastItemIndex);
-    const totalPages = Math.ceil(props.videogames.length/videogamesPerPage);
+    const currentVideogames = videogames.slice(firstItemIndex, lastItemIndex);
+    const totalPages = Math.ceil(videogames.length/videogamesPerPage);
     const pagesToRender = []
     for(let i=1; i<=totalPages;i++){
         pagesToRender.push(i);
     }
 
     useEffect(() => {
+        axios.get("http://localhost:3001/videogames").then(response => {
+      dispatch(setGames(response.data));
+      setIsLoading(false) 
+    }).catch(e=>{console.log(e); })
         if (genres.length===0)
         {axios.get("http://localhost:3001/genres")
-            .then(({ data }) => dispatch(setGenres(data))) // Set the genres state with fetched data
+            .then(({ data }) =>{dispatch(setGenres(data));}) 
             .catch((error) => window.alert(error.message));
-            console.log("fetching genres")}  //too many fetches for genre}
+            console.log("fetching genres")}  
         dispatch(filterGames({filter: "origin", options:["All"], order:order!==""?order:"none"}))
         return () => {
             dispatch(filterGames({ filter: "genre", options: [], order:order!==""?order:"none" }));
@@ -64,12 +74,21 @@ const Cards = (props)=> {
     }
 
     return(
+        <div>
+      {isLoading ? (
+        <div className={style.loader}>
+          <img src={loaderGif} alt="Loading" />
+        </div>
+      ) : (
         <div className={style.container}>
         <button className={style.options} onClick={displaying} name="FilterByGenre">Filter by Genre</button> 
         {showOptions.FilterByGenre && 
         <div className={style.checkContainer}>
         {genres.map((genre) => (
-                <label key={genre.id} className={style.check}>
+                <label key={genre.id} 
+                
+                className={`${filters.genre.includes(genre.name)? style.checked : style.check}`}
+                >
                 <input
                 
                     type="checkbox"
@@ -86,7 +105,10 @@ const Cards = (props)=> {
         <button className={style.options} onClick={displaying} name="FilterByOrigin">Filter by Origin</button> 
         {showOptions.FilterByOrigin &&
         <div className={style.checkContainer}>
-            <label className={style.check}>
+            <label 
+            //className={style.check}
+            className={`${filters.origin[filters.origin.length-1]==="All"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="origin"
@@ -96,7 +118,10 @@ const Cards = (props)=> {
                 />
                 All
             </label>
-            <label className={style.check}>
+            <label 
+            
+            className={`${filters.origin[filters.origin.length-1]==="DB"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="origin"
@@ -106,7 +131,9 @@ const Cards = (props)=> {
                 />
                 DB
             </label>
-            <label className={style.check}>
+            <label 
+            className={`${filters.origin[filters.origin.length-1]==="API"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="origin"
@@ -121,7 +148,9 @@ const Cards = (props)=> {
         <button className={style.options} onClick={displaying} name="Order">Order</button>
         {showOptions.Order && 
         <div className={style.checkContainer}>
-            <label className={style.check}>
+            <label 
+            className={`${order==="ascendingRating"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="order"
@@ -129,9 +158,11 @@ const Cards = (props)=> {
                     onClick={orderHandler}
 
                 />
-                AscendingRating
+                Ascending Rating
             </label>
-            <label className={style.check}>
+            <label 
+            className={`${order==="descendingRating"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="order"
@@ -139,9 +170,11 @@ const Cards = (props)=> {
                     onClick={orderHandler}
 
                 />
-                DescendingRating
+                Descending Rating
             </label>
-            <label className={style.check}>
+            <label 
+            className={`${order==="ascendingName"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="order"
@@ -149,9 +182,11 @@ const Cards = (props)=> {
                     onClick={orderHandler}
 
                 />
-                AscendingName
+                A-Z
             </label>
-            <label className={style.check}>
+            <label 
+            className={`${order==="descendingName"? style.checked : style.check}`}
+            >
                 <input
                     type="radio"
                     name="order"
@@ -159,7 +194,7 @@ const Cards = (props)=> {
                     onClick={orderHandler}
 
                 />
-                DescendingName
+                Z-A
             </label>
         </div>
         } 
@@ -184,7 +219,7 @@ const Cards = (props)=> {
         </div>
         <div>
         <button
-            className={style.nextPageButton}
+            className={`${style.nextPageButton} ${currentPage === 1 ? style.disabledButton : ''}`}
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -193,7 +228,7 @@ const Cards = (props)=> {
         <>
         {pagesToRender.map(page=>(
         <button
-            className={style.pageButton}
+        className={`${style.pageButton} ${currentPage === page ? style.disabledButton : ''}`}
             key={page}
             onClick={()=> setCurrentPage(page)}
             disabled={page === currentPage}
@@ -202,13 +237,16 @@ const Cards = (props)=> {
         </button>))}
         </>
         <button
-            className={style.nextPageButton}
+          className={`${style.nextPageButton} ${lastItemIndex >= videogames.length ? style.disabledButton : ''}`}
           onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={lastItemIndex >= props.videogames.length}
+          disabled={lastItemIndex >= videogames.length}
         >
           Next Page
         </button>
       </div>
+        
+        </div>
+        )}
         </div>
     )
 }

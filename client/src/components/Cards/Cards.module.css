@@ -4,14 +4,20 @@
 }
 
 .nextPageButton {
+  margin-left: 5px;
+  color: white;
   width: 100px;
   height: 23px;
-  background-color: #aaaa94;
-  border: 1px solid rgb(54, 44, 44);
+  background-color: #585e63;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 6px;
-  font-size: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  cursor: pointer;
 }
+.nextPageButton:hover{
+  opacity: 0.3;
+}
+
 .checkContainer{
   justify-content: center;
   margin-top: 10px;
@@ -25,41 +31,86 @@
 }
 
 .check{
-  background-color:#aaaa94;
-  border-radius: 5px;
+  background-color:#575757;
+  border-radius: 6px;
   text-align: center;
+  color: white;
+  border: 1px solid rgb(2, 2, 2);
+  cursor: pointer;
+  opacity: 0.3;
+}
+.check:hover{
+  opacity: 1;
+}
 
+.check input[type="checkbox"] {
+  display: none;
+}
+
+.check input[type="radio"] {
+  display: none;
+}
+
+.checked{
+  background-color:#575757;
+  border-radius: 6px;
+  text-align: center;
+  color: white;
+  border: 1px solid rgb(54,44,44);
+  cursor: pointer;
+  opacity: 1;
+}
+.checked input[type="checkbox"] {
+  display: none;
+}
+.checked input[type="radio"] {
+  display: none;
 }
 
 .options{
-  background-color: #aaaa94;
-  border: 1px solid rgba(148, 150, 145, 0.781);
+  background-color: #585e63;
+  border: 1px solid rgb(54,44,44);
   border-radius: 6px;
-  color: black;
+  color: white;
   padding: 5px;
   margin-top: 10px;
   margin-left: 5px;
+  cursor: pointer;
     
 }
 
 .options:hover{
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .pageButton {
+  color: white;
   width: 30px;
   height: 23px;
-  background-color: #aaaa94;
-  border: 1px solid rgb(54, 44, 44);
+  background-color: #585e63;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 6px;
-  font-size: 10px;
+  margin-left: 5px;
+  font-size: 12px;
   font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
 }
 
 .pageButton:hover{
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
-.nextPageButton:hover{
-  opacity: 0.5;
+.disabledButton{
+  opacity: 0.3;
 }
+.loader{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

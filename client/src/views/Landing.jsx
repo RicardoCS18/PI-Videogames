@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom" 
+
+import Enter from "../components/Enter/Enter"
 const About = ()=> {
     return(
         <>
-        <p>Welcome to this videogame page</p>
-        <button><NavLink to="/home"><h2>Enter</h2></NavLink></button>
+        <Enter/>
         </>
     )
 }
